@@ -5,6 +5,7 @@ from django.db import models
 #ايتيم محدد  صالح
 # اروى كارت اوردر
 
+
 class Doneer(models.Model): #عبد العزيز  الزهراني
    fristname = models.CharField(max_length=100)
    lastname = models.CharField(max_length=100)
