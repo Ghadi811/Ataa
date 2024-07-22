@@ -1,4 +1,9 @@
 from django.db import models
+#Doner and homepage Ghadi
+#sign in /up عبد العزيز + البروفايل
+#items retrive عبدالله
+#ايتيم محدد  صالح
+# اروى كارت اوردر
 
 class Doneer(models.Model): #عبد العزيز  الزهراني
    fristname = models.CharField(max_length=100)
@@ -16,7 +21,6 @@ class catagory(models.Model):  # صالح
 class cart(models.Model):  # اروى
 
 
-class item(models.Model):
-
+class items(models.Model):
 
 class order(models.Model):
