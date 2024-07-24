@@ -40,7 +40,7 @@ def register(request):
                         )
                     user = authenticate(username=email, password=password)
                     auth_login(request, user)
-                    return redirect('dashboard')
+                    return redirect('profile')
             except Exception as e:
                 form.add_error(None, str(e))
     else:
@@ -57,7 +57,7 @@ def login(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 auth_login(request, user)
-                return redirect('dashboard')
+                return redirect('profile')
             else:
                 form.add_error(None, 'Invalid email or password')
     else:
@@ -66,17 +66,21 @@ def login(request):
 
 
 
-@login_required
-def dashboard(request):
+def profile(request):
     user = request.user
     user_type = None
     user_data = None
-    if Doneer.objects.filter(email=user.email).exists():
-        user_type = 'Doneer'
-        user_data = Doneer.objects.get(email=user.email)
-    elif Donee.objects.filter(email=user.email).exists():
-        user_type = 'Donee'
-        user_data = Donee.objects.get(email=user.email)
+    try:
+        if Doneer.objects.filter(email=user.email).exists():
+            user_type = 'Doneer'
+            user_data = Doneer.objects.get(email=user.email)
+        elif Donee.objects.filter(email=user.email).exists():
+            user_type = 'Donee'
+            user_data = Donee.objects.get(email=user.email)
+    except Doneer.DoesNotExist:
+        user_data = None
+    except Donee.DoesNotExist:
+        user_data = None
 
     if user_data:
         context = {
@@ -93,7 +97,7 @@ def dashboard(request):
             'user_type': 'Unknown',
         }
 
-    return render(request, 'dashboard.html', context)
+    return render(request, 'profile.html', context)
 
 
 def logout_view(request):

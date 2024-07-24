@@ -1,59 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Profile</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #4CAF50;
-            margin-bottom: 30px;
-        }
-        .profile-info {
-            margin-bottom: 20px;
-        }
-        .logout-button {
-            background-color: red;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .logout-button:hover {
-            background-color: darkred;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Make the container fill the full height of the screen */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto; /* Enable scrolling if needed */
+    margin: 0; /* Remove extra margin */
+    box-sizing: border-box;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space between items */
+    text-align: left;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Fixed width for profile info */
+    height: 100%; /* Make the profile info fill the full height of the container */
+    box-sizing: border-box; /* Ensure padding and border are included in the height */
+    position: relative;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px; /* Adjust margin to control spacing */
+    margin-left: 20px;
+    width: calc(100% - 340px); /* Adjust width to fit within container */
+    height: auto; /* Allow container to grow with content */
+    box-sizing: border-box;
+}
+
+.product-box {
+    width: 250px; /* Fixed width for the boxes */
+    height: 250px; /* Fixed height for the boxes */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.logout-button {
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center; /* Center logout button */
+    margin-top: 20px;
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}
+
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Dashboard!</h1>
         <div class="profile-info">
-            <p><strong>First Name:</strong> {{ first_name }}</p>
-            <p><strong>Last Name:</strong> {{ last_name }}</p>
-            <p><strong>Email:</strong> {{ email }}</p>
-            <p><strong>Type:</strong> {{ user_type }}</p>
+            <div>
+                <h1>Welcome to Your Profile!</h1>
+                <div class="name">{{ first_name }} {{ last_name }}</div>
+                <p><strong>Email:</strong> {{ email }}</p>
+                <p><strong>Type:</strong> {{ user_type }}</p>
+            </div>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
         </div>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
+        <div class="product-container">
+            <div class="product-box">Product 1</div>
+            <div class="product-box">Product 2</div>
+            <div class="product-box">Product 3</div>
+            <div class="product-box">Product 4</div>
+            <div class="product-box">Product 5</div>
+            <div class="product-box">Product 6</div>
+            <div class="product-box">Product 7</div>
+            <div class="product-box">Product 8</div>
+            <div class="product-box">Product 6</div>
+            <div class="product-box">Product 7</div>
+            <div class="product-box">Product 8</div>
+            <div class="product-box">Product 6</div>
+            <div class="product-box">Product 7</div>
+            <div class="product-box">Product 8</div>
+        </div>
     </div>
 </body>
 </html>
