@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .forms import CustomUserCreationForm, EmailLoginForm
-from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import Doneer, Donee
 
@@ -29,14 +28,14 @@ def register(request):
                             firstname=first_name,
                             lastname=last_name,
                             email=email,
-                            password=user.password  # هنا تأكد من تخزين كلمة المرور بشكل صحيح إذا لزم الأمر
+                            password=user.password
                         )
                     elif user_type == 'donee':
                         Donee.objects.create(
                             firstname=first_name,
                             lastname=last_name,
                             email=email,
-                            password=user.password  # هنا تأكد من تخزين كلمة المرور بشكل صحيح إذا لزم الأمر
+                            password=user.password
                         )
                     user = authenticate(username=email, password=password)
                     auth_login(request, user)
