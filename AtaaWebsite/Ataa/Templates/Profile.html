@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Profile</title>
+{% extends "master.html" %}
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -93,13 +95,23 @@
             align-self: center; /* Center logout button */
             margin-top: 20px;
         }
+        .item-button {
+            background-color: green;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: center; /* Center logout button */
+            margin-top: 20px;
+        }
 
         .logout-button:hover {
             background-color: darkred;
         }
     </style>
-</head>
-<body>
     <div class="container">
         <div class="profile-info">
             <div>
@@ -111,6 +123,7 @@
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="logout-button">Logout</button>
+                <button type="submit" class="item-button">add item</button>
             </form>
         </div>
         <div class="product-container">
@@ -130,5 +143,4 @@
             <div class="product-box">Product 8</div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

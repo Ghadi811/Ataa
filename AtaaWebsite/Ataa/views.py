@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.template import loader
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .forms import CustomUserCreationForm, EmailLoginForm
 from django.db import transaction
-from .models import Doneer, Donee
+from .models import Doneer, Donee, items
 
 def home(request):
     return render(request, 'home.html')
@@ -102,3 +104,13 @@ def profile(request):
 def logout_view(request):
     auth_logout(request)
     return redirect('home')
+
+def items(request):
+    all_items = items.objects.all().select_related('category').values()
+    template = loader.get_template('Items.html')
+    context = {
+        'all_items': all_items,
+    }
+    return HttpResponse(template.render(context, request))
+def homepage(request):
+    return render(request, 'homepage.html')
